@@ -49,12 +49,18 @@ class User extends Authenticatable
     {
         return $query->where('role', intval($role));
     }
+    //for student
     public function class(){
         return $this->belongsTo(ClassRoom::class,'class_id');
+    }
+    //for teacher
+    public function subjects(){
+        return $this->hasMany(Subject::class,'teacher_id');
     }
     public function parent(){
         return $this->belongsTo(User::class,'parent_id');
     }
+    // for parent
     public function myStudent(){
         return $this->hasMany(User::class,'parent_id');
     }

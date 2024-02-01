@@ -84,7 +84,6 @@
                                 <ul class="nav nav-pills">
                                     <li class="nav-item"><a class="nav-link active" href="#Students"
                                         data-toggle="tab">My Students</a></li>
-                                    </li>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -108,7 +107,6 @@
 
                                         </div>
                                     </div>
-
                                 </div>
                                 <!-- /.tab-content -->
                             </div><!-- /.card-body -->

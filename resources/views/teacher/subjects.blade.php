@@ -5,9 +5,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>admins list - Total: {{ !empty($users) ? count($users) : '' }} </h1>
+                        <h1>{{$teacher->name}} Subjects list - Total: {{ !empty($subjects) ? count($subjects) : '' }} </h1>
                     </div>
-
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -15,22 +14,8 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('admins.index') }}" method="GET">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group col-sm-3">
-                            <input type="text" class="form-control" name="nameAndEmail">
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <input type="date" class="form-control" name="date">
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
 
-                </form>
-                @if (count($users) > 0)
+                @if (count($subjects) > 0)
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -41,29 +26,36 @@
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th>name</th>
-                                                <th>email</th>
-                                                <th>role</th>
-                                                <th>join at</th>
+                                                <th>type</th>
+                                                <th>status</th>
+                                                <th>created_by</th>
+                                                <th>created_at</th>
                                                 <th>edit</th>
                                                 <th>delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user)
+                                            @foreach ($subjects as $subject)
                                                 <tr>
-                                                    <td>{{ $user->id }}</td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->email }}</td>
-                                                    <td>Admin</td>
+                                                    <td>{{ $subject->id }}</td>
+                                                    <td>{{ $subject->name }}</td>
+                                                    <td>{{ $subject->type }}</td>
+                                                    @if ($subject->status)
+                                                    <td> Active</td>
 
-                                                    <td>{{ $user->created_at }}</td>
+                                                    @else
+                                                    <td> Inactive</td>
+
+                                                    @endif
+                                                    <td>{{ $subject->user->name }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($subject->created_at)) }}</td>
                                                     <td>
-                                                        <a href="{{ route('users.edit', $user->id) }}"
+                                                        <a href="{{ route('subjects.edit', $subject->id) }}"
                                                             class="btn btn-secondary btn-sm">
                                                             edit</a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                        <form action="{{ route('subjects.destroy', $subject->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('delete')
@@ -87,9 +79,6 @@
 
 
                     </div>
-                    {{ $users->withQueryString()->links() }}
-                @else
-                    No Result Found
                 @endif
             </div>
         </section>

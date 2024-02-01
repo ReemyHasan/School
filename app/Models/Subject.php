@@ -26,6 +26,9 @@ class Subject extends Model
     public function user(){
         return $this->belongsTo(User::class,'created_by');
     }
+    public function teacher(){
+        return $this->belongsTo(User::class,'teacher_id');
+    }
     public function classes(){
         return $this->belongsToMany(ClassRoom::class,'class_subject')->withTimestamps();
     }

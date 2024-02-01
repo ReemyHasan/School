@@ -25,6 +25,9 @@ class ClassRoom extends Model
     public function user(){
         return $this->belongsTo(User::class,'created_by');
     }
+    public function class_students(){
+        return $this->hasMany(User::class,'class_id');
+    }
     public function subjects(){
         return $this->belongsToMany(Subject::class,'class_subject','class_id')->withTimestamps();
     }

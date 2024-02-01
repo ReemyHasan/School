@@ -135,88 +135,94 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Users
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                @auth
+
+                    @if (Auth::user()->role === 1)
                         <li class="nav-item">
-                            <a href="{{ route('users.index') }}"
-                                class="nav-link {{ Route::is('users.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a class="nav-link">
+                                <i class="nav-icon far fa-user"></i>
                                 <p>
-                                    All Users
+                                    Users
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('users.index') }}"
+                                        class="nav-link {{ Route::is('users.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            All Users
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admins.index') }}"
+                                        class="nav-link {{ Route::is('admins.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Admins
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('teachers.index') }}"
+                                        class="nav-link {{ Route::is('teachers.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Teachers
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('students.index') }}"
+                                        class="nav-link {{ Route::is('students.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Students
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('parents.index') }}"
+                                        class="nav-link {{ Route::is('parents.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Parents
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('classes.index') }}"
+                                class="nav-link {{ Route::is('classes.index') ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    Classes
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admins.index') }}"
-                                class="nav-link {{ Route::is('admins.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ route('subjects.index') }}"
+                                class="nav-link {{ Route::is('subjects.index') ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
                                 <p>
-                                    Admins
+                                    Subjects
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('teachers.index') }}"
-                                class="nav-link {{ Route::is('teachers.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a href="{{ route('assign_subject.index') }}"
+                                class="nav-link {{ Route::is('assign_subject.index') ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
                                 <p>
-                                    Teachers
+                                    Assign subject
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('students.index') }}"
-                                class="nav-link {{ Route::is('students.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Students
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('parents.index') }}"
-                                class="nav-link {{ Route::is('parents.index') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Parents
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('classes.index') }}"
-                        class="nav-link {{ Route::is('classes.index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Classes
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('subjects.index') }}"
-                        class="nav-link {{ Route::is('subjects.index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Subjects
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('assign_subject.index') }}"
-                        class="nav-link {{ Route::is('assign_subject.index') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Assign subject
-                        </p>
-                    </a>
-                </li>
+                    @endif
+
+                @endauth
                 <li class="nav-item">
                     <a href={{ route('user.edit_password', Auth::user()->id) }}
                         class="nav-link {{ Route::is('user.edit_password', Auth::user()->id) ? 'active' : '' }}">

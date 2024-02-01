@@ -45,8 +45,10 @@
                                                 <th style="width: 70px">profile picture</th>
                                                 <th>name</th>
                                                 <th>email</th>
+                                                <th>address</th>
                                                 <th>status</th>
                                                 <th>join at</th>
+                                                <th>subject assigned</th>
                                                 <th>edit</th>
                                                 <th>delete</th>
                                                 <th>info</th>
@@ -65,6 +67,8 @@
                                                         </td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->address }}</td>
+
                                                     <td>
                                                         @if ($user->status)
                                                          Active
@@ -77,9 +81,15 @@
 
                                                     <td>{{ $user->created_at }}</td>
                                                     <td>
+                                                        <a href="{{ route('teachers.subjects.list', $user->id) }}"
+                                                            class="btn btn-secondary btn-sm ml-5">
+                                                        -></a>
+                                                    </td>
+
+                                                    <td>
                                                         <a href="{{ route('teachers.edit', $user->id) }}"
                                                             class="btn btn-secondary btn-sm">
-                                                            set Student Info</a>
+                                                            set Teacher Info</a>
                                                     </td>
                                                     <td>
                                                         <form action="{{ route('users.destroy', $user->id) }}"

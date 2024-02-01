@@ -23,7 +23,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
 
-                            <form action="{{route("admins.update",$user->id)}}" method="POST">
+                            <form action="{{route("users.update",$user->id)}}" method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body">
