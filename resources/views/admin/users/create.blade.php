@@ -23,7 +23,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
 
-                            <form action="{{route("admins.store")}}" method="POST">
+                            <form action="{{route("users.store")}}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">

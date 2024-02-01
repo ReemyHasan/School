@@ -34,7 +34,9 @@ class StudentController extends Controller
     {
         $user = User::find($id);
         $classes = ClassRoom::orderBy('created_at', 'desc')->get();
-        return view('student.edit', ['student'=>$user, 'classes'=>$classes]);
+        $parents = User::getParentsRecords()->get();
+        // dd($parents);
+        return view('student.edit', ['student'=>$user, 'classes'=>$classes, 'parents'=>$parents]);
     }
 
     /**
@@ -65,7 +67,8 @@ class StudentController extends Controller
         $student['date_of_birth'] = $request->get('date_of_birth');
         $student['gender'] = $request->get('gender');
         $student['class_id'] = $request->get('class_id');
-
+        $student['status'] = $request->get('status');
+        $student['parent_id'] = $request->get('parent_id');
         // dd($student);
         $user->update($student);
         return redirect()->route("students.index")->with('success', 'Student Info set Successfully');

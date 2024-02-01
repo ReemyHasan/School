@@ -64,7 +64,7 @@
                                                             set Admin Info</a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('admins.destroy', $user->id) }}"
+                                                        <form action="{{ route('users.destroy', $user->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('delete')

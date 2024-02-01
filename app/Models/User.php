@@ -52,6 +52,12 @@ class User extends Authenticatable
     public function class(){
         return $this->belongsTo(ClassRoom::class,'class_id');
     }
+    public function parent(){
+        return $this->belongsTo(User::class,'parent_id');
+    }
+    public function myStudent(){
+        return $this->hasMany(User::class,'parent_id');
+    }
     static public function getRecords()
     {
         $users = User::orderBy("created_at","desc");
@@ -73,8 +79,9 @@ class User extends Authenticatable
         $users = User::where('role',3)->orderBy("created_at","desc");
         // dd(request()->get('nameAndEmail'));
         if (request()->get('nameAndEmail')!=null) {
-            $users = $users->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
-                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');
+            $users = User::where(function ($query) {$query->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
+                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');})->where('role',3);
+
         }
         if (request()->get('date')!=null) {
             $users = $users->where('created_at', 'LIKE', '%' . request()->get('date') . '%');
@@ -86,8 +93,9 @@ class User extends Authenticatable
         $users = User::where('role',1)->orderBy("created_at","desc");
         // dd(request()->get('nameAndEmail'));
         if (request()->get('nameAndEmail')!=null) {
-            $users = $users->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
-                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');
+            $users = User::where(function ($query) {$query->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
+                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');})->where('role',1);
+
         }
         if (request()->get('date')!=null) {
             $users = $users->where('created_at', 'LIKE', '%' . request()->get('date') . '%');
@@ -99,9 +107,9 @@ class User extends Authenticatable
         $users = User::where('role',2)->orderBy("created_at","desc");
         // dd(request()->get('nameAndEmail'));
         if (request()->get('nameAndEmail')!=null) {
-            $users = $users->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
-                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');
-        }
+            $users = User::where(function ($query) {$query->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
+                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');})->where('role',2);
+       }
         if (request()->get('date')!=null) {
             $users = $users->where('created_at', 'LIKE', '%' . request()->get('date') . '%');
         }
@@ -110,10 +118,10 @@ class User extends Authenticatable
     static public function getParentsRecords()
     {
         $users = User::where('role',4)->orderBy("created_at","desc");
-        // dd(request()->get('nameAndEmail'));
+        // dd($users);
         if (request()->get('nameAndEmail')!=null) {
-            $users = $users->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
-                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');
+            $users = User::where(function ($query) {$query->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
+                ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');})->where('role',4);
         }
         if (request()->get('date')!=null) {
             $users = $users->where('created_at', 'LIKE', '%' . request()->get('date') . '%');

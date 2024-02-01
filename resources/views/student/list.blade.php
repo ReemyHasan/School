@@ -44,8 +44,9 @@
                                                 <th style="width: 10px">#</th>
                                                 <th style="width: 70px">profile picture</th>
                                                 <th>name</th>
+                                                <th>parent</th>
                                                 <th>email</th>
-                                                <th>role</th>
+                                                <th>status</th>
                                                 <th>join at</th>
                                                 <th>edit</th>
                                                 <th>delete</th>
@@ -64,8 +65,19 @@
                                                         {{-- @endif --}}
                                                         </td>
                                                     <td>{{ $user->name }}</td>
+                                                    <td>{{
+                                                    (!empty($user->parent->name))? $user->parent->name : '-'
+                                                     }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>Student</td>
+                                                    <td>
+                                                        @if ($user->status)
+                                                         Active
+
+                                                        @else
+                                                         Inactive
+
+                                                        @endif
+                                                    </td>
 
                                                     <td>{{ $user->created_at }}</td>
                                                     <td>

@@ -5,9 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>parents list - Total: {{ !empty($users) ? count($users) : '' }} </h1>
+                        <h1>Parents list - Total: {{ !empty($users) ? count($users) : '' }} </h1>
                     </div>
-
+                    <div class="col-sm-12" style="text-align: right">
+                        @include('shared.message')
+                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -40,9 +42,10 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
+                                                <th style="width: 70px">profile picture</th>
                                                 <th>name</th>
                                                 <th>email</th>
-                                                <th>role</th>
+                                                <th>status</th>
                                                 <th>join at</th>
                                                 <th>edit</th>
                                                 <th>delete</th>
@@ -52,10 +55,25 @@
                                         <tbody>
                                             @foreach ($users as $user)
                                                 <tr>
-                                                    <td>{{ $user->id }}</td>
+                                                    <td>{{$user->id}}</td>
+                                                    <td>
+                                                        {{-- @if (!empty($user->get_imageURL())) --}}
+                                                        <img class="img-fluid img-circle"
+                                                        src="{{ $user->get_imageURL() }}" alt="{{$user->id}}">
+
+                                                        {{-- @endif --}}
+                                                        </td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>Parent</td>
+                                                    <td>
+                                                        @if ($user->status)
+                                                         married
+
+                                                        @else
+                                                         divorced
+
+                                                        @endif
+                                                    </td>
 
                                                     <td>{{ $user->created_at }}</td>
                                                     <td>
@@ -64,7 +82,7 @@
                                                             set Parent Info</a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('parents.destroy', $user->id) }}"
+                                                        <form action="{{ route('users.destroy', $user->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('delete')

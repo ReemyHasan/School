@@ -23,7 +23,8 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
 
-                            <form enctype="multipart/form-data" action="{{ route('students.update', $student->id) }}" method="POST">
+                            <form enctype="multipart/form-data" action="{{ route('students.update', $student->id) }}"
+                                method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body row">
@@ -95,7 +96,7 @@
                                     <div class="form-group col-sm-3">
                                         <label for="date_of_birth">date_of_birth</label>
                                         <input type="date" class="form-control" name="date_of_birth"
-                                        value="{{$student->date_of_birth}}" >
+                                            value="{{ $student->date_of_birth }}">
                                     </div>
                                     <div class="form-group col-sm-3">
                                         <label for="height">height - cm</label>
@@ -123,8 +124,8 @@
                                             <option value="">select class</option>
                                             @foreach ($classes as $class)
                                                 <option value={{ $class->id }}
-                                                    {{($student->class->id == $class->id)?'selected' :''}}
-                                                    >{{ $class->name }}</option>
+                                                    {{ $student->class->id == $class->id ? 'selected' : '' }}>
+                                                    {{ $class->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -135,20 +136,49 @@
                                             <span>{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="role">Status</label>
+                                            <select class="form-control" name="status">
+                                                <option value="1" {{ $student->status === 1 ? 'selected' : '' }}>
+                                                    Active
+                                                </option>
+                                                <option value="0" {{ $student->status === 0 ? 'selected' : '' }}>
+                                                    Inactive
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="parent_id">Student Parent</label>
+                                            <select class="form-control" name="parent_id">
+                                                <option value="">select option</option>
+                                                @foreach ($parents as $parent)
+                                                    <option value="{{ $parent->id }}"
+                                                        @if (!empty($student->parent->id))
+                                                        {{ $student->parent->id == $parent->id ? 'selected' : '' }}
+                                                        @endif>
+                                                        {{ $parent->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class=" col-sm-12">
                                         <div class="form-group">
                                             <h4>Gender</h4>
                                             <div>
                                                 <input type="radio" value="male" name="gender"
-                                                    {{ ( $student->gender == 'male') ? 'checked' : '' }}>
-                                                    <label for="gender">male
-                                                    </label>
+                                                    {{ $student->gender == 'male' ? 'checked' : '' }}>
+                                                <label for="gender">male
+                                                </label>
                                             </div>
                                             <div>
                                                 <input type="radio" value="female" name="gender"
-                                                    {{ ( $student->gender == 'female') ? 'checked' : '' }}>
-                                                    <label for="gender">female
-                                                    </label>
+                                                    {{ $student->gender == 'female' ? 'checked' : '' }}>
+                                                <label for="gender">female
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
