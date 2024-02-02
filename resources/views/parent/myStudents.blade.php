@@ -32,6 +32,7 @@
                                                 <th>email</th>
                                                 <th>status</th>
                                                 <th>join at</th>
+                                                <th>calss subjects</th>
                                                 <th>info</th>
                                             </tr>
                                         </thead>
@@ -61,7 +62,12 @@
                                                     </td>
 
                                                     <td>{{ $user->created_at }}</td>
-
+                                                    <td>
+                                                        <a href="{{ route('students.subjects', $user->id) }}" class="">
+                                                            <span class="glyphicon glyphicon-arrow-right">
+                                                            {{$user->class->name}}
+                                                            </span></a>
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('students.show', $user->id) }}" class="">
                                                             <span class="glyphicon glyphicon-arrow-right">info</span></a>

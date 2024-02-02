@@ -66,7 +66,7 @@ class StudentController extends Controller
         $class = ClassRoom::find($user->class_id);
         $subjects = $class->subjects;
         // dd($subjects);
-        return view("student.mySubjects",['subjects'=>$subjects]);
+        return view("student.mySubjects",['user'=>$user ,'subjects'=>$subjects]);
 
     }
 

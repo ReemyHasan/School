@@ -5,7 +5,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 style="font-weight: 800">{{Auth::user()->class->name}}</h1>
+                        <h1 style="font-weight: 800; font-size:2rem;">{{$user->name}}</h1>
+                        <h1 style="font-weight: 800">{{$user->class->name}}</h1>
                         <h4>Subjects list - Total: {{ !empty($subjects) ? count($subjects) : '' }} </h4>
                     </div>
                 </div>
