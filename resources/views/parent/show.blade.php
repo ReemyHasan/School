@@ -64,61 +64,50 @@
                                 <p class="text-muted">
                                     {{ $user->mobile_number }}
                                 </p>
-
-                                <hr>
-
-                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                                    fermentum
-                                    enim neque.</p>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#Students"
-                                        data-toggle="tab">My Students</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="#Students" data-toggle="tab">My
+                                            Students</a></li>
                                     </li>
                                 </ul>
-                            </div><!-- /.card-header -->
+                            </div>
                             <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="active tab-pane" id="my_students">
-                                        <div class="my_students">
-                                            @foreach ($myStudents as $myStudent)
-                                            <div class="user-block">
-                                                <img class="img-circle img-bordered-sm"
-                                                    src="{{$myStudent->get_imageURL()}}"
-                                                     alt="{{$myStudent->id}}">
-                                                <span class="username">
-                                                    <a href="{{route("students.show",$myStudent->id)}}">
-                                                        {{$myStudent->name}}
-                                                    </a>
-                                                </span>
+                                @foreach ($myStudents as $myStudent)
+                                    <div class="tab-content row">
 
-                                                <span class="description">{{$myStudent->email}}</span>
+                                        <div class="active tab-pane" id="my_students">
+
+                                            <div class="my_students">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm"
+                                                        src="{{ $myStudent->get_imageURL() }}" alt="{{ $myStudent->id }}">
+                                                    <span class="username">
+                                                        <a href="{{ route('students.show', $myStudent->id) }}">
+                                                            {{ $myStudent->name }}
+                                                        </a>
+                                                    </span>
+
+                                                    <span class="description">{{ $myStudent->email }}</span>
+                                                </div>
+
                                             </div>
-                                            @endforeach
 
                                         </div>
-                                    </div>
 
-                                </div>
-                                <!-- /.tab-content -->
-                            </div><!-- /.card-body -->
+                                    </div>
+                                    <hr>
+                                @endforeach
+
+                            </div>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
     </div>
 @endsection

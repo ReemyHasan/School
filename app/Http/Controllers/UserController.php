@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::getRecords();
-        return view("admin.users.list", ['users' => $users->paginate(3)]);
+        return view("admin.users.list", ['users' => $users->paginate(20)]);
     }
     public function create()
     {
