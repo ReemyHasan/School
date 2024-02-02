@@ -9,27 +9,18 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::getStudentsRecords();
         return view("student.list", ['users' => $users->paginate(3)]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $user = User::find($id);
         return view('student.show', ['user'=> $user]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::find($id);
@@ -39,9 +30,6 @@ class StudentController extends Controller
         return view('student.edit', ['student'=>$user, 'classes'=>$classes, 'parents'=>$parents]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $user = User::find($id);
@@ -72,6 +60,14 @@ class StudentController extends Controller
         // dd($student);
         $user->update($student);
         return redirect()->route("students.index")->with('success', 'Student Info set Successfully');
+    }
+    public function mySubjects($id){
+        $user = User::find($id);
+        $class = ClassRoom::find($user->class_id);
+        $subjects = $class->subjects;
+        // dd($subjects);
+        return view("student.mySubjects",['subjects'=>$subjects]);
+
     }
 
 }

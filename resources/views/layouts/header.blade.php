@@ -128,8 +128,8 @@
                     data-accordion="false">
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}"
-                            class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}"
+                            class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -272,8 +272,8 @@
 
                         </li>
                         <li class="nav-item">
-                            <a href={{ route('students.show', Auth::user()->id) }}
-                                class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">
+                            <a href={{ route('students.subjects', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('students.subjects', Auth::user()->id) ? 'active' : '' }}">
                                 <i class="nav-icon far fa-user"></i>
                                 <p>
                                     My subjects

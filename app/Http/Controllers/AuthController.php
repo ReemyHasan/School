@@ -38,15 +38,7 @@ class AuthController extends Controller
 
         if (auth()->attempt($validated, $remember)) {
             request()->session()->regenerate();
-            if (Auth::user()->role == 1) {
-                // dd(Auth::user()->role);
-                return redirect()->route("admin.dashboard")->with("success", "LOGGED IN SUCCESSFULLY");
-            } else if (Auth::user()->role == 2)
-                return redirect()->route("teacher.dashboard")->with("success", "LOGGED IN SUCCESSFULLY");
-            else if (Auth::user()->role == 3)
-                return redirect()->route("student.dashboard")->with("success", "LOGGED IN SUCCESSFULLY");
-            else if (Auth::user()->role == 4)
-                return redirect()->route("parent.dashboard")->with("success", "LOGGED IN SUCCESSFULLY");
+            return redirect()->route("dashboard")->with("success", "LOGGED IN SUCCESSFULLY");
         }
         return redirect()->back()->with("error", "Error ");
     }
@@ -64,7 +56,7 @@ class AuthController extends Controller
     }
     public function change_password(Request $request)
     {
-        if ( Hash::check($request->get('old_password'),Auth::user()->password)) {
+        if (Hash::check($request->get('old_password'), Auth::user()->password)) {
             $validated = $request->validate(
                 [
                     "password" => "confirmed|required",
@@ -72,7 +64,7 @@ class AuthController extends Controller
             );
             if ($validated) {
                 User::where("id", Auth::user()->id)->update(['password' => Hash::make($validated['password'])]);
-                return redirect()->back()->with('success','password changed successfully');
+                return redirect()->back()->with('success', 'password changed successfully');
             }
         } else {
             return back()->with("error", "old password is not correct");

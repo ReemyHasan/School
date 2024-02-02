@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(["middleware" => "auth"], function () {
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name("dashboard");
 
     Route::resource("classes",ClassController::class);
     Route::resource("subjects",SubjectController::class);
@@ -32,7 +32,7 @@ Route::group(["middleware" => "auth"], function () {
     ///-------------Admin------------------
     Route::group(["middleware" => "admin"], function () {
 
-        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name("admin.dashboard");
+        // Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name("admin.dashboard");
 
         Route::resource("users",UserController::class)->except('show');
 
@@ -55,22 +55,23 @@ Route::group(["middleware" => "auth"], function () {
     ///-------------teacher------------------
     Route::group(["middleware" => "teacher"], function () {
 
-        Route::get('/teacher/dashboard', [DashboardController::class, 'index'])->name("teacher.dashboard");
+        // Route::get('/teacher/dashboard', [DashboardController::class, 'index'])->name("teacher.dashboard");
         Route::resource('teachers',TeacherController::class)->only('show');
     });
 
     ///-------------student------------------
     Route::group([''], function () {
 
-        Route::get('/student/dashboard', [DashboardController::class, 'index'])->name("student.dashboard");
+        // Route::get('/student/dashboard', [DashboardController::class, 'index'])->name("student.dashboard");
         Route::resource('students',StudentController::class)->only('show');
+        Route::get('students/{id}/subjects',[StudentController::class,'mySubjects'])->name('students.subjects');
 
     });
 
     ///-------------parent------------------
     Route::group(["middleware" => "parent"], function () {
 
-        Route::get('/parent/dashboard', [DashboardController::class, 'index'])->name("parent.dashboard");
+        // Route::get('/parent/dashboard', [DashboardController::class, 'index'])->name("parent.dashboard");
         Route::get('/parents/{id}/mystudents', [ParentsController::class, 'mystudents'])->name("parents.mystudents");
         Route::resource('parents',ParentsController::class)->only('show');
 

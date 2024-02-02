@@ -57,9 +57,6 @@ class ClassController extends Controller
         return view('class.show', ['class' => $class, 'subjects'=> $subjects, 'students'=> $students]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $class = classRoom::find($id);
@@ -67,9 +64,6 @@ class ClassController extends Controller
         return view('class.edit', ['class' => $class]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $class = classRoom::find($id);
@@ -86,9 +80,6 @@ class ClassController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $class = classRoom::find($id);
