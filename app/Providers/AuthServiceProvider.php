@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,9 @@ class AuthServiceProvider extends ServiceProvider
             return (bool) ($user->role == 1 || $user->role == 2 ||
                 ($user->role == 4 && $user2->parent_id === $user->id)
                 || $user2->id == $user->id);
+        });
+        Gate::define("subjects.create", function (User $user): bool {
+            return (bool) ($user->role == 1);
         });
     }
 }

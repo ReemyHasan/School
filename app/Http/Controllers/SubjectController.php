@@ -90,4 +90,10 @@ class SubjectController extends Controller
         $subject->delete();
         return redirect()->route("subjects.index")->with('success', 'Subject deleted Successfully');
     }
+    public function classes($id){
+        $subject = Subject::find($id);
+        $classes = $subject->classes;
+        // dd($classes);
+        return view('subject.classesRelated', ['classes'=> $classes, 'subject'=> $subject]);
+    }
 }

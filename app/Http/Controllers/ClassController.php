@@ -86,4 +86,9 @@ class ClassController extends Controller
         $class->delete();
         return redirect()->route("classes.index")->with('success', 'Class deleted Successfully');
     }
+    public function students($id){
+        $class = classRoom::find($id);
+        $students = $class->class_students;
+        return view('class.students', ['class'=> $class,'students'=> $students]);
+    }
 }

@@ -11,70 +11,8 @@
                 </div>
             </div>
         </section>
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h4>Subjects list - Total: {{ !empty($subjects) ? count($subjects) : '' }} </h4>
-                    </div>
-                    <div class="col-sm-6" style="text-align: right">
-                        @include('shared.message')
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                @if (count($subjects) > 0)
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <!-- /.card-header -->
-                                <div class="card-body p-0">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>name</th>
-                                                <th>type</th>
-                                                <th>status</th>
-                                                <th>created_by</th>
-                                                <th>created_at</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($subjects as $subject)
-                                                <tr>
-                                                    <td>{{ $subject->name }}</td>
-                                                    <td>{{ $subject->type }}</td>
-                                                    @if ($subject->status)
-                                                    <td> Active</td>
-
-                                                    @else
-                                                    <td> Inactive</td>
-
-                                                    @endif
-                                                    <td>{{ $subject->user->name }}</td>
-                                                    <td>{{ date('d-m-Y', strtotime($subject->created_at)) }}</td>
-                                            @endforeach
-
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-
-                            </div>
-
-                        </div>
 
 
-                    </div>
-                @endif
-            </div>
-        </section>
-<hr>
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -91,7 +29,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <form action="{{ route('classes.show', $class->id) }}" method="GET">
+        <form action="{{ route('classes.students', $class->id) }}" method="GET">
             @csrf
             <div class="row">
                 <div class="form-group col-sm-3">

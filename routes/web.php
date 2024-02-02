@@ -25,44 +25,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["middleware" => "auth"], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name("dashboard");
-
     Route::resource("classes",ClassController::class);
     Route::resource("subjects",SubjectController::class);
+    Route::get('classes/{id}/students', [ClassController::class,'students'])->name('classes.students');
+    // Route::resource("classes",ClassController::class)->only('show','index');
+    // Route::resource("subjects",SubjectController::class)->only('show','index');
 
     ///-------------Admin------------------
     Route::group(["middleware" => "admin"], function () {
 
-        // Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name("admin.dashboard");
-
         Route::resource("users",UserController::class)->except('show');
-
-
         Route::resource('students',StudentController::class)->only('index','edit','update');
         Route::resource('admins',AdminController::class)->only('index', 'show');
         Route::resource('teachers',TeacherController::class)->only('index','edit','update');
-        Route::get('teachers/{id}/subjects',[TeacherController::class,'subjects'])->name('teachers.subjects.list');
         Route::resource('parents',ParentsController::class)->only('index','edit','update');
-
-
         Route::resource("assign_subject",ClassSubjectController::class)->except(["show", "edit","update"]);
+
+
         Route::get("assign_subject/{class}/edit",[ClassSubjectController::class,'edit'])->name("assign_subject.class.edit");
         Route::put("assign_subject/{class}/edit",[ClassSubjectController::class, 'update'])->name("assign_subject.class.update");
         Route::put("assign_subject/{assignmet}/activate",[ClassSubjectController::class,"activate"])->name("assign_subject.activate");
-
-
+        // Route::resource("classes",ClassController::class)->only("create",'store',"edit","update",'destroy');
+        // Route::resource("subjects",SubjectController::class)->only("create",'store',"edit","update",'destroy');
 
     });
     ///-------------teacher------------------
     Route::group(["middleware" => "teacher"], function () {
-
-        // Route::get('/teacher/dashboard', [DashboardController::class, 'index'])->name("teacher.dashboard");
         Route::resource('teachers',TeacherController::class)->only('show');
+        Route::get('teachers/{id}/subjects',[TeacherController::class,'subjects'])->name('teachers.subjects.list');
+        Route::get('subjects/{id}/classes',[SubjectController::class,'classes'])->name('subject.classes.list');
     });
 
     ///-------------student------------------
     Route::group([''], function () {
-
-        // Route::get('/student/dashboard', [DashboardController::class, 'index'])->name("student.dashboard");
         Route::resource('students',StudentController::class)->only('show');
         Route::get('students/{id}/subjects',[StudentController::class,'mySubjects'])->name('students.subjects');
 
@@ -70,8 +65,6 @@ Route::group(["middleware" => "auth"], function () {
 
     ///-------------parent------------------
     Route::group(["middleware" => "parent"], function () {
-
-        // Route::get('/parent/dashboard', [DashboardController::class, 'index'])->name("parent.dashboard");
         Route::get('/parents/{id}/mystudents', [ParentsController::class, 'mystudents'])->name("parents.mystudents");
         Route::resource('parents',ParentsController::class)->only('show');
 

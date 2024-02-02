@@ -240,7 +240,15 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href={{ route('teachers.subjects.list', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('teachers.subjects.list', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My subjects
+                                </p>
+                            </a>
+                        </li>
                     @elseif (Auth::user()->role === 4)
                         <li class="nav-item">
                             <a href={{ route('parents.show', Auth::user()->id) }}

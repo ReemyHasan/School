@@ -24,20 +24,17 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10px">#</th>
                                                 <th>name</th>
                                                 <th>type</th>
                                                 <th>status</th>
                                                 <th>created_by</th>
                                                 <th>created_at</th>
-                                                <th>edit</th>
-                                                <th>delete</th>
+                                                <th>classes related</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($subjects as $subject)
                                                 <tr>
-                                                    <td>{{ $subject->id }}</td>
                                                     <td>{{ $subject->name }}</td>
                                                     <td>{{ $subject->type }}</td>
                                                     @if ($subject->status)
@@ -49,20 +46,11 @@
                                                     @endif
                                                     <td>{{ $subject->user->name }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($subject->created_at)) }}</td>
-                                                    <td>
-                                                        <a href="{{ route('subjects.edit', $subject->id) }}"
-                                                            class="btn btn-secondary btn-sm">
-                                                            edit</a>
-                                                    </td>
-                                                    <td>
-                                                        <form action="{{ route('subjects.destroy', $subject->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-sm">delete</button>
-                                                        </form>
-                                                    </td>
+                                                <td>
+                                                    <a href="{{ route('subject.classes.list', $subject->id) }}"
+                                                        class="btn btn-secondary btn-sm ml-5">
+                                                    -></a>
+                                                </td>
                                                 </tr>
                                             @endforeach
 
