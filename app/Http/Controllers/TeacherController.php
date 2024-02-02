@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use App\Models\User;
+use Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,8 +19,18 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         $user = User::find($id);
-        // dd($my_students);
-        return view('teacher.show', ['user' => $user]);
+        $teacher_classes_students = $user->teacher_classes_students;
+
+        // dd($teacher_classes_students->toArray());
+        // $subjects = $user->subjects;
+        // $classes  = array();
+        // foreach ($subjects as $subject) {
+        //     // Arr::add($classes, $subject->classes());
+        //     array_push($classes, $subject->classes);
+        // }
+        // //  dd($classes);
+        // // dd($my_students);
+         return view('teacher.show', ['user' => $user,'teacher_classes_students' => $teacher_classes_students]);
     }
     public function edit(string $id)
     {

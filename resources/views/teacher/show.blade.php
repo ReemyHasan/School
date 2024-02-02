@@ -17,7 +17,6 @@
                 <div class="row">
                     <div class="col-md-3">
 
-                        <!-- Profile Image -->
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
@@ -34,89 +33,138 @@
                                     {{ $user->gender }}
                                 </p>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
-
-                        <!-- About Me Box -->
+                    </div>
+                    <div class="col-sm-9">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">About</h3>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> occupation</strong>
-
-                                <p class="text-muted">
-                                    {{ $user->occupation }}
-                                </p>
-
-                                <hr>
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> address</strong>
-
-                                <p class="text-muted">
-                                    {{ $user->address }}
-                                </p>
-
-                                <hr>
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> mobile number</strong>
-
-                                <p class="text-muted">
-                                    {{ $user->mobile_number }}
-                                </p>
-
-                                <hr>
-
-                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                                    fermentum
-                                    enim neque.</p>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#Students"
-                                        data-toggle="tab">My Students</a></li>
-                                </ul>
-                            </div><!-- /.card-header -->
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="active tab-pane" id="my_students">
-                                        <div class="my_students">
-                                            @foreach ($myStudents as $myStudent)
-                                            <div class="user-block">
-                                                <img class="img-circle img-bordered-sm"
-                                                    src="{{$myStudent->get_imageURL()}}"
-                                                     alt="{{$myStudent->id}}">
-                                                <span class="username">
-                                                    <a href="{{route("students.show",$myStudent->id)}}">
-                                                        {{$myStudent->name}}
-                                                    </a>
-                                                </span>
+                                        <strong><i class="fas fa-book mr-1"></i> occupation</strong>
 
-                                                <span class="description">{{$myStudent->email}}</span>
-                                            </div>
-                                            @endforeach
+                                        <p class="text-muted">
+                                            {{ $user->occupation }}
+                                        </p>
 
-                                        </div>
+                                        <hr>
+                                        <strong><i class="fas fa-pencil-alt mr-1"></i> address</strong>
+
+                                        <p class="text-muted">
+                                            {{ $user->address }}
+                                        </p>
+
+                                        <hr>
+                                        <strong><i class="fas fa-pencil-alt mr-1"></i> mobile number</strong>
+
+                                        <p class="text-muted">
+                                            {{ $user->mobile_number }}
+                                        </p>
+
                                     </div>
                                 </div>
-                                <!-- /.tab-content -->
-                            </div><!-- /.card-body -->
+                            </div>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
+
+            </div>
+        </section>
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Students list - Total: {{ !empty($teacher_classes_students) ? count($teacher_classes_students) : '' }} </h1>
+                    </div>
+                    <div class="col-sm-12" style="text-align: right">
+                        @include('shared.message')
+                    </div>
+                </div>
             </div><!-- /.container-fluid -->
         </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <form action="{{ route('teachers.show', $user->id) }}" method="GET">
+                    @csrf
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <input type="text" class="form-control" name="nameAndEmail">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+
+                </form>
+                @if (count($teacher_classes_students) > 0)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body p-0">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>name</th>
+                                                <th>parent</th>
+                                                <th>email</th>
+                                                <th>status</th>
+                                                <th>class</th>
+                                                <th>subject</th>
+                                                <th>join at</th>
+                                                <th>info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($teacher_classes_students as $user)
+                                                <tr>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{
+                                                    (!empty($user->parent->name))? $user->parent->name : '-'
+                                                     }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>
+                                                        @if ($user->status)
+                                                         Active
+
+                                                        @else
+                                                         Inactive
+
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$user->class_name}}</td>
+                                                    <td>{{$user->subject_name}}</td>
+                                                    <td>{{ $user->created_at }}</td>
+                                                    <td>
+                                                        <a href="{{ route('students.show', $user->id) }}" class="">
+                                                            <span class="glyphicon glyphicon-arrow-right">info</span></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                @else
+                    No Result Found
+                @endif
+            </div>
+        </section>
     </div>
+
+
 @endsection

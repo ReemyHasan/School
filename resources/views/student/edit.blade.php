@@ -124,7 +124,10 @@
                                             <option value="">select class</option>
                                             @foreach ($classes as $class)
                                                 <option value={{ $class->id }}
-                                                    {{ $student->class->id == $class->id ? 'selected' : '' }}>
+                                                    @if (!empty($student->class))
+                                                    {{ $student->class->id == $class->id ? 'selected' : '' }}
+
+                                                    @endif>
                                                     {{ $class->name }}</option>
                                             @endforeach
                                         </select>

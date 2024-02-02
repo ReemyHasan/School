@@ -52,9 +52,9 @@ class ClassController extends Controller
     public function show(string $id)
     {
         $class = classRoom::find($id);
-        $subjects = $class->subjects()->orderBy('created_at','desc');
-        return view('class.show', ['class' => $class, 'subjects'=> $subjects]);
-
+        $subjects = $class->subjects;
+        $students = $class->class_students;
+        return view('class.show', ['class' => $class, 'subjects'=> $subjects, 'students'=> $students]);
     }
 
     /**

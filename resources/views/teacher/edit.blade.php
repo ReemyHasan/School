@@ -23,7 +23,8 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
 
-                            <form enctype="multipart/form-data" action="{{ route('teachers.update', $teacher->id) }}" method="POST">
+                            <form enctype="multipart/form-data" action="{{ route('teachers.update', $teacher->id) }}"
+                                method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="card-body row">
@@ -78,9 +79,11 @@
                                         <div class="form-group">
                                             <label for="role">Status</label>
                                             <select class="form-control" name="status">
-                                                <option value="1" {{ $teacher->status === 1 ? 'selected' : '' }}>active
+                                                <option value="1" {{ $teacher->status === 1 ? 'selected' : '' }}>
+                                                    active
                                                 </option>
-                                                <option value="0" {{ $teacher->status === 0 ? 'selected' : '' }}>inactive
+                                                <option value="0" {{ $teacher->status === 0 ? 'selected' : '' }}>
+                                                    inactive
                                                 </option>
                                             </select>
                                         </div>
@@ -89,13 +92,16 @@
                                         <div class="form-group">
                                             <h4>subjects</h4>
                                             @foreach ($subjects as $subject)
-                                            <div>
-                                                <input type="checkbox" value="{{$subject->id}}" name="subject_id[]"
-                                                    {{ !empty(in_array($subject->id, $checked)) ? 'checked' : '' }}
-                                                    >
-                                                    <label for="subject_id">{{$subject->name}}
+                                                <div>
+                                                    <input type="checkbox" value="{{ $subject->id }}" name="subject_id[]"
+
+                                                        {{ ($subject->teacher_id != $teacher->id) ? 'disabled':'' }}
+                                                        {{ !empty(in_array($subject->id, $checked)) ? 'checked' : '' }}>
+                                                    <label for="subject_id"
+                                                    style="{{ ($subject->teacher_id != $teacher->id) ? 'color: gray;':'' }}"
+                                                    >{{ $subject->name }}
                                                     </label>
-                                            </div>
+                                                </div>
                                             @endforeach
 
 
@@ -107,15 +113,15 @@
                                             <h4>Gender</h4>
                                             <div>
                                                 <input type="radio" value="male" name="gender"
-                                                    {{ ( $teacher->gender == 'male') ? 'checked' : '' }}>
-                                                    <label for="gender">male
-                                                    </label>
+                                                    {{ $teacher->gender == 'male' ? 'checked' : '' }}>
+                                                <label for="gender">male
+                                                </label>
                                             </div>
                                             <div>
                                                 <input type="radio" value="female" name="gender"
-                                                    {{ ( $teacher->gender == 'female') ? 'checked' : '' }}>
-                                                    <label for="gender">female
-                                                    </label>
+                                                    {{ $teacher->gender == 'female' ? 'checked' : '' }}>
+                                                <label for="gender">female
+                                                </label>
                                             </div>
                                         </div>
                                     </div>

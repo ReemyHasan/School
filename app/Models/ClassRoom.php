@@ -26,7 +26,19 @@ class ClassRoom extends Model
         return $this->belongsTo(User::class,'created_by');
     }
     public function class_students(){
-        return $this->hasMany(User::class,'class_id');
+        $users = $this->hasMany(User::class,'class_id');
+        // dd(request()->get('nameAndEmail'));
+        if (request()->get('nameAndEmail') != null) {
+            $users = $users->where(function ($query) {
+                $query->where('name', 'LIKE', '%' . request()->get('nameAndEmail') . '%')
+                    ->orWhere('email', 'LIKE', '%' . request()->get('nameAndEmail') . '%');
+            });
+
+        }
+        if (request()->get('date') != null) {
+            $users = $users->where('created_at', 'LIKE', '%' . request()->get('date') . '%');
+        }
+        return $users;
     }
     public function subjects(){
         return $this->belongsToMany(Subject::class,'class_subject','class_id')->withTimestamps();

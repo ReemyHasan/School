@@ -30,7 +30,7 @@ class Subject extends Model
         return $this->belongsTo(User::class,'teacher_id');
     }
     public function classes(){
-        return $this->belongsToMany(ClassRoom::class,'class_subject')->withTimestamps();
+        return $this->belongsToMany(ClassRoom::class,'class_subject','subject_id','class_id')->withTimestamps();
     }
     public function scopeSearch($query, $search){
         $query->where('name','LIKE','%'. $search .'%')
