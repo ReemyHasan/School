@@ -58,5 +58,9 @@ class ParentsController extends Controller
         $user->update($parent);
         return redirect()->route("parents.index")->with('success', 'Parent Info set Successfully');
     }
-
+    public function mystudents(string $id){
+        $user = User::find($id);
+        $my_students = $user->myStudent;
+        return view('parent.myStudents', ['user' => $user, 'users'=> $my_students]);
+    }
 }

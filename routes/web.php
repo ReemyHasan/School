@@ -37,11 +37,11 @@ Route::group(["middleware" => "auth"], function () {
         Route::resource("users",UserController::class)->except('show');
 
 
-        Route::resource('students',StudentController::class)->except('create','store','destroy');
-        Route::resource('admins',AdminController::class)->only('index');
-        Route::resource('teachers',TeacherController::class)->except('create','store','destroy');
+        Route::resource('students',StudentController::class)->only('index','edit','update');
+        Route::resource('admins',AdminController::class)->only('index', 'show');
+        Route::resource('teachers',TeacherController::class)->only('index','edit','update');
         Route::get('teachers/{id}/subjects',[TeacherController::class,'subjects'])->name('teachers.subjects.list');
-        Route::resource('parents',ParentsController::class)->except('create','store','destroy');
+        Route::resource('parents',ParentsController::class)->only('index','edit','update');
 
 
         Route::resource("assign_subject",ClassSubjectController::class)->except(["show", "edit","update"]);
@@ -56,13 +56,14 @@ Route::group(["middleware" => "auth"], function () {
     Route::group(["middleware" => "teacher"], function () {
 
         Route::get('/teacher/dashboard', [DashboardController::class, 'index'])->name("teacher.dashboard");
-
+        Route::resource('teachers',TeacherController::class)->only('show');
     });
 
     ///-------------student------------------
-    Route::group(["middleware" => "student"], function () {
+    Route::group([''], function () {
 
         Route::get('/student/dashboard', [DashboardController::class, 'index'])->name("student.dashboard");
+        Route::resource('students',StudentController::class)->only('show');
 
     });
 
@@ -70,6 +71,8 @@ Route::group(["middleware" => "auth"], function () {
     Route::group(["middleware" => "parent"], function () {
 
         Route::get('/parent/dashboard', [DashboardController::class, 'index'])->name("parent.dashboard");
+        Route::get('/parents/{id}/mystudents', [ParentsController::class, 'mystudents'])->name("parents.mystudents");
+        Route::resource('parents',ParentsController::class)->only('show');
 
     });
 });

@@ -121,21 +121,21 @@
             </div>
         </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+        @auth
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}"
-                        class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
-                </li>
-                @auth
+                    <li class="nav-item">
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
 
                     @if (Auth::user()->role === 1)
                         <li class="nav-item">
@@ -220,33 +220,89 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href={{ route('admins.show', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('admins.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My profile
+                                </p>
+                            </a>
+
+                        </li>
+                    @elseif (Auth::user()->role === 2)
+                        <li class="nav-item">
+                            <a href={{ route('teachers.show', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('teachers.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My profile
+                                </p>
+                            </a>
+                        </li>
+
+                    @elseif (Auth::user()->role === 4)
+                        <li class="nav-item">
+                            <a href={{ route('parents.show', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('parents.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My profile
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href={{ route('parents.mystudents', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('parents.mystudents', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My students
+                                </p>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href={{ route('students.show', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My profile
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href={{ route('students.show', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>
+                                    My subjects
+                                </p>
+                            </a>
+
+                        </li>
                     @endif
 
-                @endauth
-                <li class="nav-item">
-                    <a href={{ route('user.edit_password', Auth::user()->id) }}
-                        class="nav-link {{ Route::is('user.edit_password', Auth::user()->id) ? 'active' : '' }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Change password
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link {{ Route::is('logout') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            logout
-                        </p>
-                    </a>
-                    {{-- <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button class="nav-link" type="submit">logout</button>
-                    </form>
-                     --}}
-                </li>
-            </ul>
-        </nav>
+                    <li class="nav-item">
+                        <a href={{ route('user.edit_password', Auth::user()->id) }}
+                            class="nav-link {{ Route::is('user.edit_password', Auth::user()->id) ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>
+                                Change password
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link {{ Route::is('logout') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>
+                                logout
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        @endauth
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

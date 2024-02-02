@@ -38,11 +38,9 @@
                                     {{ $user->gender}}
                                 </p>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
 
-                        <!-- About Me Box -->
+                        @can('users.show', $user)
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">About</h3>
@@ -100,9 +98,10 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
+                        @endcan
+
                     </div>
-                    <!-- /.col -->
+                    @can('users.show', $user)
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header p-2">
@@ -138,10 +137,9 @@
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!-- /.col -->
+                    @endcan
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
     </div>
 @endsection
