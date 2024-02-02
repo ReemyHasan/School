@@ -128,8 +128,7 @@
                     data-accordion="false">
 
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}"
-                            class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -143,6 +142,8 @@
                                 <i class="nav-icon far fa-user"></i>
                                 <p>
                                     Users
+                                    <i class="right fas fa-angle-left"></i>
+
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -193,37 +194,58 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('classes.index') }}"
-                                class="nav-link {{ Route::is('classes.index') ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                        <li class="nav-item menu-open">
+                            <a class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Classes
+                                    Academics
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('classes.index') }}"
+                                        class="nav-link {{ Route::is('classes.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+
+                                        <p>
+                                            Classes
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('subjects.index') }}"
+                                        class="nav-link {{ Route::is('subjects.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+
+                                        <p>
+                                            Subjects
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('assign_subject.index') }}"
+                                        class="nav-link {{ Route::is('assign_subject.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+
+                                        <p>
+                                            Assign subject
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('subjects.index') }}"
-                                class="nav-link {{ Route::is('subjects.index') ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
-                                <p>
-                                    Subjects
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('assign_subject.index') }}"
-                                class="nav-link {{ Route::is('assign_subject.index') ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
-                                <p>
-                                    Assign subject
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href={{ route('admins.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('admins.show', Auth::user()->id) ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                                @if (Auth::user()->image != null)
+                                    <img src="{{ Auth::user()->get_imageUrl() }}">
+                                @else
+                                    <i class="nav-icon far fa-user">
+                                    </i>
+                                @endif
+
                                 <p>
                                     My profile
                                 </p>
@@ -234,7 +256,16 @@
                         <li class="nav-item">
                             <a href={{ route('teachers.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('teachers.show', Auth::user()->id) ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                                @if (Auth::user()->image != null)
+                                    <i class="nav-icon">
+                                        <img class="img-fluid img-circle" style="width: 23px;"
+                                            src="{{ Auth::user()->get_imageUrl() }}">
+
+                                    </i>
+                                @else
+                                    <i class="nav-icon far fa-user">
+                                    </i>
+                                @endif
                                 <p>
                                     My profile
                                 </p>
@@ -253,7 +284,16 @@
                         <li class="nav-item">
                             <a href={{ route('parents.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('parents.show', Auth::user()->id) ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                                @if (Auth::user()->image != null)
+                                <i class="nav-icon">
+                                    <img class="img-fluid img-circle" style="width: 23px;"
+                                        src="{{ Auth::user()->get_imageUrl() }}">
+
+                                </i>
+                            @else
+                                <i class="nav-icon far fa-user">
+                                </i>
+                            @endif
                                 <p>
                                     My profile
                                 </p>
@@ -272,7 +312,24 @@
                         <li class="nav-item">
                             <a href={{ route('students.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                                @if (Auth::user()->image != null)
+                                <i class="nav-icon">
+                                    <img class="img-fluid img-circle" style="width: 23px;"
+                                        src="{{ Auth::user()->get_imageUrl() }}">
+
+                                </i>
+                            @else
+                            @if (Auth::user()->image != null)
+                            <i class="nav-icon">
+                                <img class="img-fluid img-circle" style="width: 23px;"
+                                    src="{{ Auth::user()->get_imageUrl() }}">
+
+                            </i>
+                        @else
+                            <i class="nav-icon far fa-user">
+                            </i>
+                        @endif
+                            @endif
                                 <p>
                                     My profile
                                 </p>
