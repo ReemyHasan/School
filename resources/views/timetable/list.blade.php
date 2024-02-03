@@ -51,7 +51,7 @@
                                                 <th>created_by</th>
                                                 <th>created_at</th>
                                                 <th>edit</th>
-                                                <th>class timetable</th>
+                                                <th>Set class timetable</th>
                                                 <th>delete</th>
                                                 <th>details</th>
                                             </tr>
@@ -76,9 +76,9 @@
                                                             edit</a>
                                                     </td>
                                                     <td >
-                                                        <a href="{{ route('timetables.show', $class->id) }}"
-                                                            class="ml-md-4">
-                                                            <span class="glyphicon glyphicon-arrow-right">show</span></a>
+                                                        <a href="{{ route('classes.show', $class->id) }}"
+                                                            class="ml-md-5">
+                                                            <span class="glyphicon glyphicon-arrow-right">set</span></a>
                                                     </td>
                                                     <td>
                                                         <form action="{{ route('classes.destroy', $class->id) }}"
@@ -91,7 +91,7 @@
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('classes.show', $class->id) }}"
-                                                            class="ml-md-2">
+                                                            class="">
                                                             <span class="glyphicon glyphicon-arrow-right">info</span></a>
                                                     </td>
                                                 </tr>

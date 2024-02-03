@@ -29,6 +29,9 @@ class ClassController extends Controller
      */
     public function create()
     {
+        // dd(Auth::user()->role);
+        $this->authorize('create');
+        // $this->authorize(Auth::user());
         return view("class.create");
     }
 
@@ -37,6 +40,8 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(Auth::user()->role);
+        $this->authorize('create');
         $validated = $request->validate([
             "name"=> "min:3|max:255|unique:class_rooms|required",
         ]);
@@ -60,13 +65,16 @@ class ClassController extends Controller
     public function edit(string $id)
     {
         $class = classRoom::find($id);
+        $this->authorize('update',$class);
         // dd($class->id);
         return view('class.edit', ['class' => $class]);
     }
 
     public function update(Request $request, string $id)
     {
+        // $this->authorize('update',Auth::user());
         $class = classRoom::find($id);
+        $this->authorize('update',$class);
         $validated = $request->validate(
             [
                 "name" => "max:225|min:5|unique:class_rooms,name,".$id
@@ -82,6 +90,7 @@ class ClassController extends Controller
 
     public function destroy(string $id)
     {
+        $this->authorize('delete');
         $class = classRoom::find($id);
         $class->delete();
         return redirect()->route("classes.index")->with('success', 'Class deleted Successfully');
