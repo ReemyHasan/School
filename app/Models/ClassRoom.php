@@ -25,6 +25,9 @@ class ClassRoom extends Model
     public function user(){
         return $this->belongsTo(User::class,'created_by');
     }
+    public function timetables(){
+        return $this->hasMany(Timetable::class,'class_id');
+    }
     public function class_students(){
         $users = $this->hasMany(User::class,'class_id');
         // dd(request()->get('nameAndEmail'));

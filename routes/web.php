@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\ParentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -40,8 +41,9 @@ Route::group(["middleware" => "auth"], function () {
         Route::resource('teachers',TeacherController::class)->only('index','edit','update');
         Route::resource('parents',ParentsController::class)->only('index','edit','update');
         Route::resource("assign_subject",ClassSubjectController::class)->except(["show", "edit","update"]);
+        Route::resource("classes/{class_id}/timetables",ClassTimetableController::class)->only('create','store','destroy');
 
-
+        Route::get('classes/{class_id}/timetable',[ClassTimetableController::class,'show'])->name('timetables.show');
         Route::get("assign_subject/{class}/edit",[ClassSubjectController::class,'edit'])->name("assign_subject.class.edit");
         Route::put("assign_subject/{class}/edit",[ClassSubjectController::class, 'update'])->name("assign_subject.class.update");
         Route::put("assign_subject/{assignmet}/activate",[ClassSubjectController::class,"activate"])->name("assign_subject.activate");
