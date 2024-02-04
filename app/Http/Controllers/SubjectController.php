@@ -42,17 +42,6 @@ class SubjectController extends Controller
         return redirect()->route("subjects.index")->with('success', 'Subject Created Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $subject = Subject::find($id);

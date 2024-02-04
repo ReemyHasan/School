@@ -294,15 +294,15 @@
                             <a href={{ route('parents.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('parents.show', Auth::user()->id) ? 'active' : '' }}">
                                 @if (Auth::user()->image != null)
-                                <i class="nav-icon">
-                                    <img class="img-fluid img-circle" style="width: 23px;"
-                                        src="{{ Auth::user()->get_imageUrl() }}">
+                                    <i class="nav-icon">
+                                        <img class="img-fluid img-circle" style="width: 23px;"
+                                            src="{{ Auth::user()->get_imageUrl() }}">
 
-                                </i>
-                            @else
-                                <i class="nav-icon far fa-user">
-                                </i>
-                            @endif
+                                    </i>
+                                @else
+                                    <i class="nav-icon far fa-user">
+                                    </i>
+                                @endif
                                 <p>
                                     My profile
                                 </p>
@@ -318,27 +318,36 @@
                             </a>
                         </li>
                     @else
+                    <li class="nav-item">
+                        <a href={{ route('timetables.show', Auth::user()->class_id) }}
+                            class="nav-link {{ Route::is('timetables.show', Auth::user()->id) ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                My Timetable
+                            </p>
+                        </a>
+                    </li>
                         <li class="nav-item">
                             <a href={{ route('students.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">
                                 @if (Auth::user()->image != null)
-                                <i class="nav-icon">
-                                    <img class="img-fluid img-circle" style="width: 23px;"
-                                        src="{{ Auth::user()->get_imageUrl() }}">
+                                    <i class="nav-icon">
+                                        <img class="img-fluid img-circle" style="width: 23px;"
+                                            src="{{ Auth::user()->get_imageUrl() }}">
 
-                                </i>
-                            @else
-                            @if (Auth::user()->image != null)
-                            <i class="nav-icon">
-                                <img class="img-fluid img-circle" style="width: 23px;"
-                                    src="{{ Auth::user()->get_imageUrl() }}">
+                                    </i>
+                                @else
+                                    @if (Auth::user()->image != null)
+                                        <i class="nav-icon">
+                                            <img class="img-fluid img-circle" style="width: 23px;"
+                                                src="{{ Auth::user()->get_imageUrl() }}">
 
-                            </i>
-                        @else
-                            <i class="nav-icon far fa-user">
-                            </i>
-                        @endif
-                            @endif
+                                        </i>
+                                    @else
+                                        <i class="nav-icon far fa-user">
+                                        </i>
+                                    @endif
+                                @endif
                                 <p>
                                     My profile
                                 </p>

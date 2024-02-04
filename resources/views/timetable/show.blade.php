@@ -7,12 +7,14 @@
                     <div class="col-sm-6">
                         <h1 style="font-weight: 800">{{ $class->name }} </h1>
                     </div>
-                    <div class="col-sm-12" style="text-align: right">
-                        <a class="btn btn-primary" href="{{ route('timetables.create', $class->id) }}">update timetable</a>
-                    </div>
-                    <div class="col-sm-6" style="text-align: right">
-                        @include('shared.message')
-                    </div>
+                    @can('subjects.create')
+                        <div class="col-sm-12" style="text-align: right">
+                            <a class="btn btn-primary" href="{{ route('timetables.create', $class->id) }}">update timetable</a>
+                        </div>
+                        <div class="col-sm-6" style="text-align: right">
+                            @include('shared.message')
+                        </div>
+                    @endcan
                 </div>
             </div>
         </section>

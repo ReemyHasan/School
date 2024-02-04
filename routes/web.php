@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(["middleware" => "auth"], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name("dashboard");
     Route::resource("classes", ClassController::class);
-    Route::resource("subjects", SubjectController::class);
+    Route::resource("subjects", SubjectController::class)->except('show');
     Route::get('classes/{id}/students', [ClassController::class, 'students'])->name('classes.students');
     Route::get('classes/{class_id}/timetable', [ClassTimetableController::class, 'show'])->name('timetables.show');
 
