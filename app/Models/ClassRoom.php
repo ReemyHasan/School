@@ -50,4 +50,15 @@ class ClassRoom extends Model
         $query->where('name','LIKE','%'. $search .'%')
         ->orWhere('created_at','LIKE','%'. $search .'%');
     }
+    public function mySubjectstimetable(){
+        return $this->hasMany(Timetable::class,'class_id')
+        ->join('subjects','subjects.id','=','class_timetable.subject_id')
+        ->join('week','week.id','=','class_timetable.day_id')
+        ->select("class_timetable.id",
+            "subjects.id as subject_id","subjects.name as subject_name",
+            "week.id as day_id", "week.name as day_name"
+        ,"start_time")
+        ->orderBy("week.id","asc")
+        ->orderBy("start_time","asc");
+    }
 }
