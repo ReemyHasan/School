@@ -51,6 +51,8 @@ Route::group(["middleware" => "auth"], function () {
     Route::group(["middleware" => "teacher"], function () {
         Route::resource('teachers', TeacherController::class)->only('show');
         Route::get('teachers/{id}/subjects', [TeacherController::class, 'subjects'])->name('teachers.subjects.list');
+        Route::get('teachers/{id}/timetable', [TeacherController::class, 'timetable'])->name('teachers.timetable.list');
+
         Route::get('subjects/{id}/classes', [SubjectController::class, 'classes'])->name('subject.classes.list');
     });
 

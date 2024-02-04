@@ -95,4 +95,21 @@ class TeacherController extends Controller
         // dd($subjects);
         return view('teacher.subjects',['subjects'=> $subjects,'teacher'=> $user]);
     }
+    public function timetable($id){
+        $user = User::find($id);
+        $timetable = $user->mySubjectstimetable;
+        // dd($timetable->toArray());
+        $week = [];
+        $sunday = $timetable->where("day_id", 1)->toArray();
+        $week[1] = $sunday;
+        $monday = $timetable->where("day_id", 2)->toArray();
+        $week[2] = $monday;
+        $tuesday = $timetable->where("day_id", 3)->toArray();
+        $week[3] = $tuesday;
+        $wednesday = $timetable->where("day_id", 4)->toArray();
+        $week[4] = $wednesday;
+        $thursday = $timetable->where("day_id", 5)->toArray();
+        $week[5] = $thursday;
+        return view('teacher.timetable',['teacher'=> $user, 'week' => $week]);
+    }
 }

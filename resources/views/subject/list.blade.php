@@ -48,6 +48,7 @@
                                                 <th style="width: 10px">#</th>
                                                 <th>name</th>
                                                 <th>type</th>
+                                                <th>teacher</th>
                                                 <th>status</th>
                                                 <th>created_by</th>
                                                 <th>created_at</th>
@@ -61,6 +62,11 @@
                                                     <td>{{ $subject->id }}</td>
                                                     <td>{{ $subject->name }}</td>
                                                     <td>{{ $subject->type }}</td>
+                                                    @if ($subject->teacher!=null)
+                                                    <td>{{$subject->teacher->name}}</td>
+                                                    @else
+                                                        <td>-</td>
+                                                    @endif
                                                     @if ($subject->status)
                                                     <td> Active</td>
 

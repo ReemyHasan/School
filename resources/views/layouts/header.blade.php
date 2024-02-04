@@ -274,9 +274,18 @@
                         <li class="nav-item">
                             <a href={{ route('teachers.subjects.list', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('teachers.subjects.list', Auth::user()->id) ? 'active' : '' }}">
-                                <i class="nav-icon far fa-user"></i>
+                                <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     My subjects
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href={{ route('teachers.timetable.list', Auth::user()->id) }}
+                                class="nav-link {{ Route::is('teachers.timetable.list', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    My Timetable
                                 </p>
                             </a>
                         </li>

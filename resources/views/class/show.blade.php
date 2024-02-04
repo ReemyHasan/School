@@ -38,6 +38,7 @@
                                             <tr>
                                                 <th>name</th>
                                                 <th>type</th>
+                                                <th>teacher</th>
                                                 <th>status</th>
                                                 <th>created_by</th>
                                                 <th>created_at</th>
@@ -48,6 +49,7 @@
                                                 <tr>
                                                     <td>{{ $subject->name }}</td>
                                                     <td>{{ $subject->type }}</td>
+                                                    <td>{{$subject->teacher->name}}</td>
                                                     @if ($subject->status)
                                                     <td> Active</td>
 

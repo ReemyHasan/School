@@ -63,6 +63,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Subject::class, 'teacher_id');
     }
+    //for teacher
+    public function mySubjectstimetable(){
+        return $this->hasMany(Subject::class, 'teacher_id')
+        ->join('class_timetable','subjects.id','=','class_timetable.subject_id')
+        ->join('class_rooms','class_timetable.class_id','=','class_rooms.id')
+        ->join('week','week.id','=','class_timetable.day_id')
+        ->select("class_timetable.id",
+            "subjects.id as subject_id","subjects.name as subject_name",
+            // "class_id",
+            "class_rooms.name as class_name",
+            "week.id as day_id", "week.name as day_name"
+        ,"start_time")
+        ->orderBy("week.id","asc")
+        ->orderBy("start_time","asc");
+    }
     public function parent()
     {
         return $this->belongsTo(User::class, 'parent_id');
