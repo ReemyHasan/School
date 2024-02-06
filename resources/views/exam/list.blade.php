@@ -8,12 +8,12 @@
                         <h1>Exams list - Total: {{ !empty($exams) ? count($exams) : '' }} </h1>
                     </div>
                     @can('create', Auth::user())
-                    <div class="col-sm-12" style="text-align: right">
-                        <a class="btn btn-primary" href="{{ route('exams.create') }}">Add new exam</a>
-                    </div>
-                    <div class="col-sm-6" style="text-align: right">
-                        @include('shared.message')
-                    </div>
+                        <div class="col-sm-12" style="text-align: right">
+                            <a class="btn btn-primary" href="{{ route('exams.create') }}">Add new exam</a>
+                        </div>
+                        <div class="col-sm-6" style="text-align: right">
+                            @include('shared.message')
+                        </div>
                     @endcan
 
                 </div>
@@ -25,14 +25,13 @@
                     @csrf
                     <div class="row">
                         <div class="form-group col-sm-3">
-                            <input type="text" class="form-control"
-                            placeholder="exam_name" name="exam_name">
+                            <input type="text" class="form-control" placeholder="exam_name" name="exam_name">
                         </div>
                         <div class="form-group col-sm-3">
                             <select class="form-control" name="subject_id">
                                 <option value=''>select subject</option>
                                 @foreach ($subjects as $subject)
-                                <option value={{$subject->id}}>{{$subject->name}}</option>
+                                    <option value={{ $subject->id }}>{{ $subject->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -65,7 +64,9 @@
                                                 <th>start time</th>
                                                 <th>end time</th>
                                                 <th>edit</th>
-                                                <th>delete</th>
+                                                @can('delete', Auth::user())
+                                                    <th>delete</th>
+                                                @endcan
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -73,33 +74,34 @@
                                                 <tr>
                                                     <td>{{ $exam->id }}</td>
                                                     <td>{{ $exam->name }}</td>
-                                                    <td>{{$exam->subject->name}}</td>
-                                                    @if ($exam->subject->teacher_id!=null)
-                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;{{$exam->subject->teacher->name}}</td>
+                                                    <td>{{ $exam->subject->name }}</td>
+                                                    @if ($exam->subject->teacher_id != null)
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $exam->subject->teacher->name }}</td>
                                                     @else
-                                                        <td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             &nbsp;&nbsp;-</td>
                                                     @endif
-                                                    <td>{{$exam->date}}</td>
-                                                    <td>{{$exam->full_mark}}</td>
-                                                    <td>{{$exam->passing_mark}}</td>
-                                                    <td>{{$exam->start_time}}</td>
-                                                    <td>{{$exam->end_time}}</td>
-
+                                                    <td>{{ $exam->date }}</td>
+                                                    <td>{{ $exam->full_mark }}</td>
+                                                    <td>{{ $exam->passing_mark }}</td>
+                                                    <td>{{ $exam->start_time }}</td>
+                                                    <td>{{ $exam->end_time }}</td>
                                                     <td>
                                                         <a href="{{ route('exams.edit', $exam->id) }}"
                                                             class="btn btn-secondary btn-sm">
                                                             edit</a>
                                                     </td>
-                                                    <td>
-                                                        <form action="{{ route('exams.destroy', $exam->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-sm">delete</button>
-                                                        </form>
-                                                    </td>
+                                                    @can('delete', Auth::user())
+                                                        <td>
+                                                            <form action="{{ route('exams.destroy', $exam->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger btn-sm">delete</button>
+                                                            </form>
+                                                        </td>
+                                                    @endcan
                                                 </tr>
                                             @endforeach
 
@@ -115,7 +117,7 @@
 
                     </div>
                     {{ $exams->withQueryString()->links() }}
-                    @else
+                @else
                     no result found
                 @endif
             </div>

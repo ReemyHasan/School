@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -17,12 +18,14 @@ class ExamController extends Controller
 
     public function create()
     {
+        $this->authorize('create',Exam::class);
         $subject = Subject::orderBy('created_at', 'desc')->get();
         return view('exam.create', ['subjects' => $subject]);
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create',Exam::class);
         Exam::create($request->except('_token'));
         return redirect()->route('exams.index')->with('success','exam added successfully');
     }
@@ -35,6 +38,7 @@ class ExamController extends Controller
     public function edit(string $id)
     {
         $exam = Exam::find($id);
+        $this->authorize('update',$exam);
         $subject = Subject::orderBy('created_at', 'desc')->get();
         return view('exam.edit', ['exam'=> $exam,  'subjects' => $subject]);
     }

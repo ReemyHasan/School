@@ -320,6 +320,16 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('exams.index') }}"
+                                class="nav-link {{ Route::is('exams.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-table nav-icon"></i>
+
+                                <p>
+                                    Exams
+                                </p>
+                            </a>
+                        </li>
                     @elseif (Auth::user()->role === 4)
                         <li class="nav-item">
                             <a href={{ route('parents.show', Auth::user()->id) }}

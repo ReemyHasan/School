@@ -8,6 +8,7 @@ use App\Models\Exam;
 use App\Models\Subject;
 use App\Models\User;
 use App\Policies\ClassPolicy;
+use App\Policies\ExamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -36,6 +37,9 @@ class AuthServiceProvider extends ServiceProvider
                 || $user2->id == $user->id);
         });
         Gate::define("subjects.create", function (User $user): bool {
+            return (bool) ($user->role == 1);
+        });
+        Gate::define("classes.create", function (User $user): bool {
             return (bool) ($user->role == 1);
         });
     }

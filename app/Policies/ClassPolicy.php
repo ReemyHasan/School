@@ -4,11 +4,12 @@ namespace App\Policies;
 
 use App\Models\ClassRoom;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ClassPolicy
 {
-
     public function view(User $user, ClassRoom $classRoom): bool
     {
         if($user->role === 4)
@@ -27,14 +28,6 @@ class ClassPolicy
         );
     }
 
-    public function create(User $user): bool
-    {
-        return $user->role === 1;
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, ClassRoom $classRoom): bool
     {
         return $user->role === 1;

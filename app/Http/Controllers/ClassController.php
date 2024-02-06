@@ -29,9 +29,9 @@ class ClassController extends Controller
      */
     public function create()
     {
-        // dd(Auth::user()->role);
-        $this->authorize('create');
-        // $this->authorize(Auth::user());
+        // $this->authorize('create');
+        if(auth()->user()->cannot('classes.create'))
+            abort(401);
         return view("class.create");
     }
 
@@ -40,8 +40,8 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(Auth::user()->role);
-        $this->authorize('create');
+        if(auth()->user()->cannot('classes.create'))
+            abort(401);
         $validated = $request->validate([
             "name"=> "min:3|max:255|unique:class_rooms|required",
         ]);
@@ -72,7 +72,6 @@ class ClassController extends Controller
 
     public function update(Request $request, string $id)
     {
-        // $this->authorize('update',Auth::user());
         $class = classRoom::find($id);
         $this->authorize('update',$class);
         $validated = $request->validate(
