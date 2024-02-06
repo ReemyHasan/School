@@ -33,6 +33,7 @@
                                                 <th>status</th>
                                                 <th>join at</th>
                                                 <th>calss subjects</th>
+                                                <th>timetable</th>
                                                 <th>info</th>
                                             </tr>
                                         </thead>
@@ -67,6 +68,12 @@
                                                             <span class="glyphicon glyphicon-arrow-right">
                                                             {{$user->class->name}}
                                                             </span></a>
+                                                    </td>
+                                                    <td>
+                                                        <a href={{ route('timetables.show', $user->class_id) }}
+                                                            class="ml-4">
+                                                            <i class="fas fa-th"></i>
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('students.show', $user->id) }}" class="">

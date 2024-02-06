@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\ClassRoom;
+use App\Models\Exam;
 use App\Models\Subject;
 use App\Models\User;
 use App\Policies\ClassPolicy;
@@ -20,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         ClassRoom::class => ClassPolicy::class,
+        Exam::class => ExamPolicy::class,
     ];
 
     /**

@@ -233,6 +233,37 @@
                                         </p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            examination
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('exams.index') }}"
+                                                class="nav-link {{ Route::is('exams.index') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+
+                                                <p>
+                                                    Exams
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('exams.create') }}"
+                                                class="nav-link {{ Route::is('exams.create') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+
+                                                <p>
+                                                    Add Exam
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
@@ -318,15 +349,15 @@
                             </a>
                         </li>
                     @else
-                    <li class="nav-item">
-                        <a href={{ route('timetables.show', Auth::user()->class_id) }}
-                            class="nav-link {{ Route::is('timetables.show', Auth::user()->id) ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                My Timetable
-                            </p>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href={{ route('timetables.show', Auth::user()->class_id) }}
+                                class="nav-link {{ Route::is('timetables.show', Auth::user()->id) ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    My Timetable
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href={{ route('students.show', Auth::user()->id) }}
                                 class="nav-link {{ Route::is('students.show', Auth::user()->id) ? 'active' : '' }}">

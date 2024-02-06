@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassTimetableController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ParentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -30,6 +31,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource("subjects", SubjectController::class)->except('show');
     Route::get('classes/{id}/students', [ClassController::class, 'students'])->name('classes.students');
     Route::get('classes/{class_id}/timetable', [ClassTimetableController::class, 'show'])->name('timetables.show');
+    Route::resource('exams',ExamController::class);
 
     ///-------------Admin------------------
     Route::group(["middleware" => "admin"], function () {
